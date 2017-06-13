@@ -71,6 +71,23 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *timeZoneName = self.timeZoneNames[indexPath.row];
+    UIActivityIndicatorView *activityView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.center=CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+    activityView.color = [UIColor redColor];
+    
+    NSString *titileString =[NSString stringWithFormat:@"当前选中%@时区",timeZoneName];
+    UIAlertController *alertview=[UIAlertController alertControllerWithTitle:@"提示" message:titileString preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *defult = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
+        NSLog(@"您点击了OK..");
+        
+    }];
+    [alertview addAction:defult];
+    [self presentViewController:alertview animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
